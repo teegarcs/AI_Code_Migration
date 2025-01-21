@@ -7,6 +7,5 @@ This is a demo of how an agentic workflow can be used to migrate/update code bas
 
 #### Workflow Demo:
 This demo is concise and focuses on migrating two Android files - an xml and kt file that both contain Button defintions that need migrated/updated. 
-![Demo](docs/demo.mov)
 
 [<img src="docs/demo_shot.png">](https://github.com/teegarcs/AI_Code_Migration/raw/refs/heads/main/docs/demo.mov)

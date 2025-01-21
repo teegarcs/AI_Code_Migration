@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.teegarcs.core_kotlin_android.MainViewModel"/>
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+            <com.teegarcs.core_kotlin_android.MyCustomButton
+                    android:id="@+id/fullFetchJoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:my_padding="10dp"
+                   />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/full_fetch_has_a_life_span_of_30_seconds"
+                    android:textAlignment="center"/>
+
+            <com.teegarcs.core_kotlin_android.MyCustomButton
+                    android:id="@+id/cachedJoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:my_padding="16dp"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/cached_joke_will_pull_from_lru_or_disk_only"
+                    android:textAlignment="center"/>
+
+            <com.teegarcs.core_kotlin_android.MyCustomButton
+                    android:id="@+id/refreshJoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:my_padding="0dp"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/force_refresh_will_load_from_lru_and_then_go_straight_to_disk"
+                    android:textAlignment="center"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/customJoke"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@={viewModel.customJokeText}"
+                    android:inputType="textShortMessage"/>
+
+            <com.teegarcs.core_kotlin_android.MyCustomButton
+                    android:id="@+id/saveCustomBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:customClick="@{() -> viewModel.saveJoke()}"
+                    android:label="@string/save_custom_joke"/>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/save_custom_joke_will_update_the_repository_and_save"
+                    android:textAlignment="center"/>
+
+
+            <TextView
+                    android:id="@+id/jokeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="75dp"
+                    android:text="@{viewModel.jokeData}"
+                    android:textAlignment="center"
+                    tools:text="Some sample text"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80ffffff"
+                app:visible="@{safeUnbox(viewModel.loadingLiveData)}">
+
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+</layout>
